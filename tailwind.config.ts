@@ -8,18 +8,25 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
       colors: {
         dark: {
-          200: '#0a0a0a',
-          300: '#171717',
-          400: '#0a0a0a',
-          500: '#0a0a0a',
-          600: '#0a0a0a',
-          700: '#0a0a0a',
+          200: '#0D0F10',
+          300: '#0C0C0C',
+          400: '#151515',
+          500: '#363A3D',
+          600: '#76828D',
+          700: '#ABB8C4',
         },
         light: {
-          200: '#ededed',
+          200: '#E8E9E9',
           300: '#ededed',
           400: '#ededed',
           500: '#ededed',

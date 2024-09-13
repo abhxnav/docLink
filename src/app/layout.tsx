@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/lib/utils'
-import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeProvider } from '@/components'
+import type { ReactNode } from 'react'
 
 const fontRoboto = Roboto({
   subsets: ['latin'],
@@ -12,14 +13,14 @@ const fontRoboto = Roboto({
 
 export const metadata: Metadata = {
   title: 'DocLink - Book appointment, track health',
-  description: `A heathcare management tool. Book your doctor's appointment. Track your health.`,
+  description: `A healthcare management tool. Book your doctor's appointment. Track your health.`,
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+interface RootLayoutProps {
+  children: ReactNode
+}
+
+export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
     <html lang="en">
       <body
