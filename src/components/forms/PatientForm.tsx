@@ -9,6 +9,7 @@ import { CiMail, CiUser } from 'react-icons/ci'
 import { useState } from 'react'
 import { UserFormData, UserFormValidation } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
+import { createUser } from '@/lib/appwrite/patient.actions'
 
 export enum FormFieldType {
   INPUT = 'input',
@@ -40,10 +41,10 @@ const PatientForm = () => {
   }) => {
     try {
       setIsLoading(true)
-      //   const userData = { name, email, phone }
-      //   const user = await createUser(userData)
+      const userData = { name, email, phone }
+      const user = await createUser(userData)
 
-      //   if (user) router.push(`/patients/${user.$id}/register`)
+      if (user) router.push(`/patients/${user.$id}/register`)
     } catch (error) {
       console.error(error)
     } finally {
