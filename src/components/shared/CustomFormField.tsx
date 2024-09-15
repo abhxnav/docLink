@@ -7,8 +7,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+  Input,
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+  Textarea,
+  Checkbox,
+} from '@/components/ui'
 import { Control } from 'react-hook-form'
 import { FormFieldType } from '@/components/forms/PatientForm'
 import 'react-phone-number-input/style.css'
@@ -16,9 +22,6 @@ import PhoneInput, { type Value } from 'react-phone-number-input'
 import { CiCalendar } from 'react-icons/ci'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { Select, SelectContent, SelectTrigger, SelectValue } from '../ui/select'
-import { Textarea } from '../ui/textarea'
-import { Checkbox } from '../ui/checkbox'
 
 interface CustomProps {
   control: Control<any>

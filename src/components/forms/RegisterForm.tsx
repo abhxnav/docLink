@@ -2,20 +2,23 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { Form, FormControl } from '@/components/ui/form'
-import { CustomFormField, SubmitButton } from '@/components'
+import { CustomFormField, SubmitButton, FileUploader } from '@/components'
 import { CiMail, CiUser } from 'react-icons/ci'
 import { useState } from 'react'
 import { UserFormData, UserFormValidation } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
 import { createUser } from '@/lib/appwrite/patient.actions'
 import { FormFieldType } from '@/components/forms/PatientForm'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import {
+  RadioGroup,
+  RadioGroupItem,
+  Label,
+  SelectItem,
+  Form,
+  FormControl,
+} from '@/components/ui'
 import { Doctors, GenderOptions, IdTypes } from '@/constants'
-import { Label } from '../ui/label'
-import { SelectItem } from '../ui/select'
 import Image from 'next/image'
-import { FileUploader } from '@/components'
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter()

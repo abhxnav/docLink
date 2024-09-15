@@ -1,7 +1,6 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui'
 import Image from 'next/image'
 import Loader from '@/../../public/assets/icons/loader.svg'
-import type { SVGProps } from 'react'
 
 interface CustomProps {
   isLoading?: boolean
