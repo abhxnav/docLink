@@ -1,10 +1,12 @@
-import { FC } from 'react'
 import Image from 'next/image'
-import Logo from '../../public/assets/logos/Logo_1.png'
-import { PatientForm } from '@/components'
+import Logo from '@/../public/assets/logos/Logo_1.png'
 import Link from 'next/link'
+import { RegisterForm } from '@/components'
+import { getUser } from '@/lib/appwrite/patient.actions'
 
-const Home: FC = () => {
+const Register = async ({ params: { userId } }: SearchParamProps) => {
+  const user = await getUser(userId)
+
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
@@ -17,7 +19,7 @@ const Home: FC = () => {
             className="mb-12 h-14 w-fit"
           />
 
-          <PatientForm />
+          <RegisterForm user={user} />
 
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-dark-600 xl:text-left">
@@ -29,6 +31,7 @@ const Home: FC = () => {
           </div>
         </div>
       </section>
+
       {/* <Image
         src={''}
         alt="doctor"
@@ -40,4 +43,4 @@ const Home: FC = () => {
   )
 }
 
-export default Home
+export default Register

@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { z } from 'zod'
 import { Form } from '@/components/ui/form'
 import { CustomFormField, SubmitButton } from '@/components'
 import { CiMail, CiUser } from 'react-icons/ci'
