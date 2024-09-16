@@ -25,9 +25,6 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
             <p className="justify-items-end text-dark-600 xl:text-left">
               &copy; 2024 DocLink
             </p>
-            <Link href={'/?admin=true'} className="text-pink-400">
-              Admin
-            </Link>
           </div>
         </div>
       </section>

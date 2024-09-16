@@ -5,9 +5,8 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { CustomFormField, SubmitButton, FileUploader } from '@/components'
 import { CiMail, CiUser } from 'react-icons/ci'
 import { useState } from 'react'
-import { UserFormData, UserFormValidation } from '@/lib/validations'
+import { PatientFormData, PatientFormValidation } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
-import { createUser } from '@/lib/appwrite/patient.actions'
 import { FormFieldType } from '@/components/forms/PatientForm'
 import {
   RadioGroup,
@@ -17,33 +16,59 @@ import {
   Form,
   FormControl,
 } from '@/components/ui'
-import { Doctors, GenderOptions, IdTypes } from '@/constants'
+import {
+  Doctors,
+  GenderOptions,
+  IdTypes,
+  PatientFormDefaultValues,
+} from '@/constants'
 import Image from 'next/image'
+import { registerPatient } from '@/lib/appwrite/patient.actions'
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const form = useForm<UserFormData>({
-    resolver: zodResolver(UserFormValidation),
+  const form = useForm<PatientFormData>({
+    resolver: zodResolver(PatientFormValidation),
     defaultValues: {
+      ...PatientFormDefaultValues,
       name: '',
       email: '',
       phone: '',
     },
   })
 
-  const onSubmit: SubmitHandler<UserFormData> = async ({
-    name,
-    email,
-    phone,
-  }) => {
-    try {
-      setIsLoading(true)
-      const userData = { name, email, phone }
-      const user = await createUser(userData)
+  const onSubmit: SubmitHandler<PatientFormData> = async (values) => {
+    setIsLoading(true)
 
-      if (user) router.push(`/patients/${user.$id}/register`)
+    let formData
+
+    if (
+      values.identificationDocument &&
+      values.identificationDocument.length > 0
+    ) {
+      const blobFile = new Blob([values.identificationDocument[0]], {
+        type: values.identificationDocument[0].type,
+      })
+
+      formData = new FormData()
+      formData.append('blobFile', blobFile)
+      formData.append('fileName', values.identificationDocument[0].name)
+    }
+
+    try {
+      const patientData = {
+        ...values,
+        userId: user.$id,
+        birthDate: new Date(values.birthDate),
+        identificationDocument: formData,
+      }
+
+      // @ts-ignore
+      const patient = await registerPatient(patientData)
+
+      if (patient) router.push(`/patients/${user.$id}/new-appointment`)
     } catch (error) {
       console.error(error)
     } finally {
