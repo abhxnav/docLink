@@ -109,6 +109,10 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               showTimeSelect={showTimeSelect ?? false}
               timeInputLabel="Time:"
               wrapperClassName="date-picker"
+              isClearable
+              showMonthDropdown
+              useShortMonthInDropdown
+              minDate={new Date()}
             />
           </FormControl>
         </div>

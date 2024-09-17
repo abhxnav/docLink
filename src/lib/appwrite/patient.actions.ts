@@ -19,7 +19,6 @@ export const createUser = async (user: CreateUserParams) => {
       undefined,
       user.name
     )
-    console.log({ newUser })
     return parseStringify(newUser)
   } catch (error: any) {
     if (error && error?.code === 409) {
@@ -34,6 +33,19 @@ export const getUser = async (userId: string) => {
   try {
     const user = await users.get(userId)
     return parseStringify(user)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getPatient = async (userId: string) => {
+  try {
+    const patients = await databases.listDocuments(
+      appwriteEnv.DB_ID!,
+      appwriteEnv.PATIENT_COLLECTION_ID!,
+      [Query.equal('userId', [userId])]
+    )
+    return parseStringify(patients.documents[0])
   } catch (error) {
     console.error(error)
   }

@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Logo from '@/../public/assets/logos/Logo_1.png'
-import Link from 'next/link'
-import { RegisterForm } from '@/components'
+import { Copyright, RegisterForm } from '@/components'
 import { getUser } from '@/lib/appwrite/patient.actions'
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
@@ -21,11 +20,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
           <RegisterForm user={user} />
 
-          <div className="text-14-regular mt-20 flex justify-between">
-            <p className="justify-items-end text-dark-600 xl:text-left">
-              &copy; 2024 DocLink
-            </p>
-          </div>
+          <Copyright />
         </div>
       </section>
 

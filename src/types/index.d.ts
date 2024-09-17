@@ -32,6 +32,16 @@ declare interface RegisterUserParams extends CreateUserParams {
   privacyConsent: boolean
 }
 
+declare type CreateAppointmentParams = {
+  userId: string
+  patient: string
+  primaryPhysician: string
+  appointmentReason: string
+  schedule: Date
+  status: Status
+  note: string | undefined
+}
+
 declare type SearchParamProps = {
   params: { [key: string]: string }
   searchParams: { [key: string]: string | string[] | undefined }

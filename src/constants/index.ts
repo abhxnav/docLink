@@ -28,39 +28,39 @@ export const PatientFormDefaultValues = {
 
 export const Doctors = [
   {
-    image: '/assets/images/dr-green.png',
+    image: '/assets/images/doctor.png',
     name: 'John Green',
   },
   {
-    image: '/assets/images/dr-cameron.png',
+    image: '/assets/images/doctor.png',
     name: 'Leila Cameron',
   },
   {
-    image: '/assets/images/dr-livingston.png',
+    image: '/assets/images/doctor.png',
     name: 'David Livingston',
   },
   {
-    image: '/assets/images/dr-peter.png',
+    image: '/assets/images/doctor.png',
     name: 'Evan Peter',
   },
   {
-    image: '/assets/images/dr-powell.png',
+    image: '/assets/images/doctor.png',
     name: 'Jane Powell',
   },
   {
-    image: '/assets/images/dr-remirez.png',
+    image: '/assets/images/doctor.png',
     name: 'Alex Ramirez',
   },
   {
-    image: '/assets/images/dr-lee.png',
+    image: '/assets/images/doctor.png',
     name: 'Jasmine Lee',
   },
   {
-    image: '/assets/images/dr-cruz.png',
+    image: '/assets/images/doctor.png',
     name: 'Alyana Cruz',
   },
   {
-    image: '/assets/images/dr-sharma.png',
+    image: '/assets/images/doctor.png',
     name: 'Hardik Sharma',
   },
 ]

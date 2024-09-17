@@ -113,6 +113,14 @@
     @apply text-18-bold md:text-24-bold;
   }
 
+  .success-img {
+    @apply m-auto flex flex-1 flex-col items-center justify-between;
+  }
+
+  .request-details {
+    @apply flex w-full flex-col items-center gap-8 border-y-2 border-dark-400 my-6 py-8 md:w-fit md:flex-row;
+  }
+
   .text-14-regular {
     @apply text-[14px] leading-[18px] font-normal;
   }
@@ -151,6 +159,10 @@
 
   .shad-primary-btn {
     @apply bg-pink-400 text-dark-200 hover:bg-pink-700 !important;
+  }
+
+  .shad-danger-btn {
+    @apply bg-red-700 text-white !important;
   }
 
   .shad-error {
@@ -262,6 +274,25 @@
 .react-datepicker__time-list-item {
   display: flex !important;
   align-items: center !important;
+}
+
+.react-datepicker__month-dropdown {
+  background-color: #151515 !important;
+}
+
+.react-datepicker__day--disabled {
+  background-color: #363a3d !important;
+  color: #151515 !important;
+  border-radius: 0.3rem;
+}
+
+.react-datepicker__time-list {
+  scrollbar-width: thin !important;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: #f472b6 !important;
+  color: #151515 !important;
 }
 
 .data-\[state\=checked\]\:bg-primary[data-state="checked"] {

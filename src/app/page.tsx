@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import Image from 'next/image'
 import Logo from '../../public/assets/logos/Logo_1.png'
-import { PatientForm } from '@/components'
+import { Copyright, PatientForm } from '@/components'
 import Link from 'next/link'
 
 const Home: FC = () => {
@@ -19,14 +19,7 @@ const Home: FC = () => {
 
           <PatientForm />
 
-          <div className="text-14-regular mt-20 flex justify-between">
-            <p className="justify-items-end text-dark-600 xl:text-left">
-              &copy; 2024 DocLink
-            </p>
-            <Link href={'/?admin=true'} className="text-pink-400">
-              Admin
-            </Link>
-          </div>
+          <Copyright adminBtn />
         </div>
       </section>
       {/* <Image
