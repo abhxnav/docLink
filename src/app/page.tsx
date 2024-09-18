@@ -1,12 +1,13 @@
-import { FC } from 'react'
 import Image from 'next/image'
 import Logo from '../../public/assets/logos/Logo_1.png'
-import { Copyright, PatientForm } from '@/components'
-import Link from 'next/link'
+import { Copyright, PasskeyModal, PatientForm } from '@/components'
 
-const Home: FC = () => {
+const Home = ({ searchParams }: SearchParamProps) => {
+  const isAdmin = searchParams?.admin === 'true'
+
   return (
     <div className="flex h-screen max-h-screen">
+      {isAdmin && <PasskeyModal />}
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[800px]">
           <Image
