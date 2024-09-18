@@ -1,13 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Logo from '@/../public/assets/logos/Logo_1.png'
 import SuccessGIF from '@/../public/assets/gifs/success.gif'
 import { getAppointment } from '@/lib/appwrite/appointment.actions'
 import { Doctors } from '@/constants'
 import { CiCalendar } from 'react-icons/ci'
 import { formatDateTime } from '@/lib/utils'
 import { Button } from '@/components/ui'
-import { Copyright } from '@/components'
+import { Copyright, Logo } from '@/components'
 
 const AppointmentSuccess = async ({
   params: { userId },
@@ -21,13 +20,7 @@ const AppointmentSuccess = async ({
     <div className="flex h-screen max-h-screen px-[5%]">
       <div className="success-img">
         <Link href="/">
-          <Image
-            src={Logo}
-            alt="logo"
-            height={1000}
-            width={1000}
-            className="h-10 w-fit"
-          />
+          <Logo full className="h-10 w-fit" />
         </Link>
 
         <section className="flex flex-col items-center">
