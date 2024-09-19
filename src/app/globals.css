@@ -121,6 +121,22 @@
     @apply flex w-full flex-col items-center gap-8 border-y-2 border-dark-400 my-6 py-8 md:w-fit md:flex-row;
   }
 
+  .admin-header {
+    @apply sticky top-3 z-20 mx-3 flex items-center justify-between rounded-2xl bg-dark-200 px-[5%] py-5 shadow-lg xl:px-12;
+  }
+
+  .admin-main {
+    @apply flex flex-col items-center space-y-6 px-[5%] pb-12 xl:space-y-12 xl:px-12;
+  }
+
+  .admin-stat {
+    @apply flex w-full flex-col justify-between gap-5 sm:flex-row xl:gap-10;
+  }
+
+  .stat-card {
+    @apply flex flex-1 flex-col gap-6 rounded-2xl bg-cover p-6 shadow-lg;
+  }
+
   .text-14-regular {
     @apply text-[14px] leading-[18px] font-normal;
   }
@@ -133,8 +149,16 @@
     @apply text-[12px] leading-[16px] font-normal;
   }
 
+  .text-12-semibold {
+    @apply text-[12px] leading-[16px] font-semibold;
+  }
+
   .text-14-medium {
     @apply text-[14px] leading-[18px] font-medium;
+  }
+
+  .text-16-semibold {
+    @apply text-[16px] leading-[20px] font-semibold;
   }
 
   .text-18-bold {
@@ -165,6 +189,10 @@
     @apply bg-red-700 text-white !important;
   }
 
+  .shad-gray-btn {
+    @apply border border-dark-500 cursor-pointer bg-dark-400 text-white !important;
+  }
+
   .shad-error {
     @apply text-red-400 !important;
   }
@@ -193,6 +221,34 @@
     @apply text-36-bold justify-center flex border border-dark-500 rounded-lg size-16 gap-4 !important;
   }
 
+  .shad-dialog {
+    @apply bg-dark-400 border-dark-500 !important;
+  }
+
+  .shad-dialog button {
+    @apply focus:ring-0 focus:ring-offset-0 focus-visible:border-none focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
+  }
+
+  .shad-table {
+    @apply rounded-lg overflow-hidden !important;
+  }
+
+  .shad-table-row-header {
+    @apply border-b border-dark-400 text-light-200 hover:bg-transparent !important;
+  }
+
+  .shad-table-row {
+    @apply border-b border-dark-400 text-light-200 !important;
+  }
+
+  .data-table {
+    @apply z-10 w-full overflow-hidden rounded-lg border border-dark-400 shadow-lg;
+  }
+
+  .table-actions {
+    @apply flex w-full items-center justify-between space-x-2 p-4;
+  }
+
   .input-phone {
     @apply mt-2 h-11 rounded-md px-3 text-sm border bg-dark-400 placeholder:text-dark-600 border-dark-500 !important;
   }
@@ -216,6 +272,41 @@
   .checkbox-label {
     @apply cursor-pointer text-sm font-medium text-dark-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 md:leading-none;
   }
+
+  .status-badge {
+    @apply flex w-fit items-center gap-2 rounded-full px-4 py-2;
+  }
+
+}
+
+.bg-appointment {
+  background: rgb(244, 114, 182);
+  background: linear-gradient(300deg, rgba(244, 114, 182, 0.39539565826330536) 0%, rgba(13, 15, 16, 1) 100%);
+}
+
+.text-appointment {
+  color: rgb(244, 114, 182);
+  color: linear-gradient(300deg, rgba(244, 114, 182, 0.39539565826330536) 0%, rgba(13, 15, 16, 1) 100%);
+}
+
+.bg-pending {
+  background: rgb(250, 204, 21);
+  background: linear-gradient(300deg, rgba(250, 204, 21, 0.4) 0%, rgba(13, 15, 16, 1) 100%);
+}
+
+.text-pending {
+  color: rgb(250, 204, 21);
+  color: linear-gradient(300deg, rgba(250, 204, 21, 0.4) 0%, rgba(13, 15, 16, 1) 100%);
+}
+
+.bg-cancelled {
+  background: rgb(239, 68, 68);
+  background: linear-gradient(300deg, rgba(239, 68, 68, 0.4) 0%, rgba(13, 15, 16, 1) 100%);
+}
+
+.text-cancelled {
+  color: rgb(239, 68, 68);
+  color: linear-gradient(300deg, rgba(239, 68, 68, 0.4) 0%, rgba(13, 15, 16, 1) 100%);
 }
 
 .PhoneInputInput {

@@ -42,6 +42,13 @@ declare type CreateAppointmentParams = {
   note: string | undefined
 }
 
+declare type UpdateAppointmentParams = {
+  appointmentId: string
+  userId: string
+  appointment: Appointment
+  type: string
+}
+
 declare type SearchParamProps = {
   params: { [key: string]: string }
   searchParams: { [key: string]: string | string[] | undefined }
