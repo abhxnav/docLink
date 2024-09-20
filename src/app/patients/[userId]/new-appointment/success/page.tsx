@@ -30,8 +30,8 @@ const AppointmentSuccess = async ({
             been successfully submitted!
           </h2>
           <p>
-            We'll send you a confirmation{' '}
-            <span className="text-pink-500">sms</span> and{' '}
+            We'll send you a confirmation
+            <span className="text-pink-500">sms</span> and
             <span className="text-pink-500">email</span> shortly.
           </p>
         </section>
@@ -40,8 +40,8 @@ const AppointmentSuccess = async ({
           <p>Requested appointment details:</p>
           <div className="flex items-center gap-3">
             <Image
-              src={doctor?.image!}
-              alt={doctor?.name!}
+              src={doctor?.image || ''}
+              alt={doctor?.name || ''}
               width={100}
               height={100}
               className="h-10 w-fit"

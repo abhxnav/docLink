@@ -3,7 +3,8 @@ import { twMerge } from 'tailwind-merge'
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs))
 
-export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value))
+export const parseStringify = <T>(value: T): T =>
+  JSON.parse(JSON.stringify(value))
 
 export const convertFileToUrl = (file: File) => URL.createObjectURL(file)
 
@@ -62,4 +63,15 @@ export const formatDateTime = (dateString: Date | string) => {
     dateOnly: formattedDate,
     timeOnly: formattedTime,
   }
+}
+
+export const isAppwriteError = (
+  error: unknown
+): error is { code: number; message: string } => {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    'code' in error &&
+    typeof (error as any).code === 'number'
+  )
 }
