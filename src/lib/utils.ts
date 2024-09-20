@@ -72,6 +72,6 @@ export const isAppwriteError = (
     typeof error === 'object' &&
     error !== null &&
     'code' in error &&
-    typeof (error as any).code === 'number'
+    typeof error.code === 'number'
   )
 }

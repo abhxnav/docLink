@@ -30,7 +30,7 @@ const AppointmentSuccess = async ({
             been successfully submitted!
           </h2>
           <p>
-            We'll send you a confirmation
+            We will send you a confirmation
             <span className="text-pink-500">sms</span> and
             <span className="text-pink-500">email</span> shortly.
           </p>

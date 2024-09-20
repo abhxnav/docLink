@@ -15,7 +15,7 @@ import {
   Textarea,
   Checkbox,
 } from '@/components/ui'
-import { Control, ControllerRenderProps } from 'react-hook-form'
+import { Control, ControllerRenderProps, FieldValues } from 'react-hook-form'
 import { FormFieldType } from '@/components/forms/PatientForm'
 import 'react-phone-number-input/style.css'
 import PhoneInput, { type Value } from 'react-phone-number-input'
@@ -24,7 +24,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 interface CustomProps {
-  control: Control<any>
+  control: Control<FieldValues>
   fieldType: FormFieldType
   name: string
   label?: string
@@ -36,7 +36,7 @@ interface CustomProps {
   showTimeSelect?: boolean
   children?: React.ReactNode
   renderSkeleton?: (
-    field: ControllerRenderProps<any, string>
+    field: ControllerRenderProps<FieldValues, string>
   ) => React.ReactNode
 }
 
@@ -44,7 +44,7 @@ const RenderField = ({
   field,
   props,
 }: {
-  field: ControllerRenderProps<any, string>
+  field: ControllerRenderProps<FieldValues, string>
   props: CustomProps
 }) => {
   const {
