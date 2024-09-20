@@ -1,8 +1,8 @@
 'use server'
 
 import { ID, Query } from 'node-appwrite'
-import { appwriteEnv, databases } from './appwrite.config'
-import { parseStringify } from '../utils'
+import { appwriteEnv, databases, messaging } from './appwrite.config'
+import { formatDateTime, parseStringify } from '../utils'
 import { Appointment } from '@/types/appwrite.types'
 import { revalidatePath } from 'next/cache'
 
@@ -40,7 +40,24 @@ export const updateAppointment = async ({
       throw new Error('Appointment not found')
     }
 
-    // TODO: SMS notification
+    const message = `
+    Hi! It's DocLink.
+    ${
+      type === 'schedule'
+        ? `Your appointment with Dr. ${
+            appointment.primaryPhysician
+          } has been scheduled for ${
+            formatDateTime(appointment.schedule).dateTime
+          }.
+          ${appointment.note && `Note: ${appointment?.note}`}
+          `
+        : `We regret to inform you that your appointment has been cancelled due to the following reason: 
+        ${appointment.cancellationReason}
+        `
+    }
+    `
+
+    await sendSMSNotification(userId, message)
 
     revalidatePath('/admin')
     return parseStringify(updatedAppointment)
@@ -97,6 +114,21 @@ export const getAppointmentList = async () => {
     }
 
     return parseStringify(data)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const sendSMSNotification = async (userId: string, content: string) => {
+  try {
+    const message = await messaging.createSms(
+      ID.unique(),
+      content,
+      [],
+      [userId]
+    )
+
+    return parseStringify(message)
   } catch (error) {
     console.error(error)
   }
