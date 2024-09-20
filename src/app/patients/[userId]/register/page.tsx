@@ -10,7 +10,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
         <div className="sub-container max-w-[800px]">
           <Logo full className="mb-12 h-14 w-fit" />
 
-          <RegisterForm user={user} />
+          <RegisterForm user={user as User} />
 
           <Copyright />
         </div>

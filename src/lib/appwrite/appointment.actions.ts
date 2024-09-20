@@ -110,12 +110,19 @@ export const getAppointmentList = async () => {
     const data = {
       totalCount: appointments.total,
       ...counts,
-      documents: appointments.documents,
+      documents: appointments.documents as Appointment[],
     }
 
     return parseStringify(data)
   } catch (error) {
     console.error(error)
+    return {
+      totalCount: 0,
+      scheduledCount: 0,
+      pendingCount: 0,
+      cancelledCount: 0,
+      documents: [],
+    }
   }
 }
 

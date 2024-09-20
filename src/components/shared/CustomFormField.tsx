@@ -24,7 +24,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
 interface CustomProps {
-  control: Control<FieldValues>
+  control: Control<any>
   fieldType: FormFieldType
   name: string
   label?: string
@@ -35,18 +35,10 @@ interface CustomProps {
   dateFormat?: string
   showTimeSelect?: boolean
   children?: React.ReactNode
-  renderSkeleton?: (
-    field: ControllerRenderProps<FieldValues, string>
-  ) => React.ReactNode
+  renderSkeleton?: (field: any) => React.ReactNode
 }
 
-const RenderField = ({
-  field,
-  props,
-}: {
-  field: ControllerRenderProps<FieldValues, string>
-  props: CustomProps
-}) => {
+const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const {
     fieldType,
     icon,

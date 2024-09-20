@@ -13,7 +13,7 @@ const NewAppointment = async ({ params: { userId } }: SearchParamProps) => {
           <AppointmentForm
             type="create"
             userId={userId}
-            patientId={patient?.$id}
+            patientId={patient?.$id || ''}
           />
 
           <Copyright />
