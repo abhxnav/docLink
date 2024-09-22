@@ -4,39 +4,37 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Form } from '@/components/ui'
 import { CustomFormField, SubmitButton } from '@/components'
-import { CiLock, CiMail, CiUser } from 'react-icons/ci'
+import { CiLock, CiMail } from 'react-icons/ci'
 import { useState } from 'react'
-import { UserFormData, UserFormValidation } from '@/lib/validations'
+import { LoginFormData, LoginFormValidation } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
-import { createUser, login } from '@/lib/appwrite/patient.actions'
+import { login } from '@/lib/appwrite/patient.actions'
 import { FormFieldType } from '@/constants'
 
-const PatientForm = () => {
+const LoginForm = () => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const form = useForm<UserFormData>({
-    resolver: zodResolver(UserFormValidation),
+  const form = useForm<LoginFormData>({
+    resolver: zodResolver(LoginFormValidation),
     defaultValues: {
-      name: '',
       email: '',
       password: '',
     },
   })
 
-  const onSubmit: SubmitHandler<UserFormData> = async ({
-    name,
+  const onSubmit: SubmitHandler<LoginFormData> = async ({
     email,
     password,
   }) => {
     try {
       setIsLoading(true)
-      const userData = { name, email, password }
-      const user = await createUser(userData)
+      const userData = { email, password }
+      const session = await login(userData)
 
-      if (user) {
+      if (session) {
         await login({ email, password })
-        router.push(`/patients/${user.$id}/register`)
+        router.push(`/patients/${session.userId}/new-appointment`)
       }
     } catch (error) {
       console.error(error)
@@ -52,15 +50,6 @@ const PatientForm = () => {
           <h1 className="header">Hey, Welcome!👋</h1>
           <p className="text-dark-700">Schedule your first appointment.</p>
         </section>
-        <CustomFormField
-          control={form.control}
-          fieldType={FormFieldType.INPUT}
-          name="name"
-          label="Full name"
-          placeholder="John Doe"
-          icon={<CiUser className="ml-2 h-6 w-6" />}
-          iconAlt=""
-        />
         <CustomFormField
           control={form.control}
           fieldType={FormFieldType.INPUT}
@@ -85,4 +74,4 @@ const PatientForm = () => {
   )
 }
 
-export default PatientForm
+export default LoginForm

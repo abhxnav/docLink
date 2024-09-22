@@ -7,7 +7,7 @@ import { CiMail, CiUser } from 'react-icons/ci'
 import { useState } from 'react'
 import { PatientFormData, PatientFormValidation } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
-import { FormFieldType } from '@/components/forms/PatientForm'
+import { FormFieldType } from '@/constants'
 import {
   RadioGroup,
   RadioGroupItem,

@@ -3,6 +3,7 @@ export { ThemeProvider } from '@/components/theme-provider'
 export { default as PatientForm } from '@/components/forms/PatientForm'
 export { default as RegisterForm } from '@/components/forms/RegisterForm'
 export { default as AppointmentForm } from '@/components/forms/AppointmentForm'
+export { default as LoginForm } from '@/components/forms/LoginForm'
 
 export { default as CustomFormField } from '@/components/shared/CustomFormField'
 export { default as SubmitButton } from '@/components/shared/SubmitButton'

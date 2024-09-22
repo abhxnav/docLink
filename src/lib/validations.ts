@@ -6,12 +6,18 @@ export const UserFormValidation = z.object({
     .min(2, 'Username must be at least 2 characters.')
     .max(50, 'Username must be less than 50 characters.'),
   email: z.string().email('Please enter a valid email.'),
-  phone: z
-    .string()
-    .refine(
-      (phone) => /^\+\d{10,15}$/.test(phone),
-      'Please enter a valid phone number.'
-    ),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+  // phone: z
+  //   .string()
+  //   .refine(
+  //     (phone) => /^\+\d{10,15}$/.test(phone),
+  //     'Please enter a valid phone number.'
+  //   ),
+})
+
+export const LoginFormValidation = z.object({
+  email: z.string().email('Please enter a valid email.'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
 })
 
 export const PatientFormValidation = z.object({
@@ -122,3 +128,4 @@ export const getAppointmentSchema = (type: string) => {
 
 export type UserFormData = z.infer<typeof UserFormValidation>
 export type PatientFormData = z.infer<typeof PatientFormValidation>
+export type LoginFormData = z.infer<typeof LoginFormValidation>

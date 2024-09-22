@@ -15,8 +15,8 @@ import {
   Textarea,
   Checkbox,
 } from '@/components/ui'
-import { Control, ControllerRenderProps, FieldValues } from 'react-hook-form'
-import { FormFieldType } from '@/components/forms/PatientForm'
+import { Control } from 'react-hook-form'
+import { FormFieldType } from '@/constants'
 import 'react-phone-number-input/style.css'
 import PhoneInput, { type Value } from 'react-phone-number-input'
 import { CiCalendar } from 'react-icons/ci'
@@ -63,6 +63,25 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               placeholder={placeholder}
               {...field}
               className="shad-input border-0"
+            />
+          </FormControl>
+        </div>
+      )
+
+    case FormFieldType.PASSWORD:
+      return (
+        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+          {icon ? (
+            <div className="flex items-center justify-center">{icon}</div>
+          ) : (
+            <p>{iconAlt}</p>
+          )}
+          <FormControl>
+            <Input
+              placeholder={placeholder}
+              {...field}
+              className="shad-input border-0"
+              type="password"
             />
           </FormControl>
         </div>

@@ -1,27 +1,21 @@
-import { Copyright, PasskeyModal, PatientForm, Logo } from '@/components'
+import { Logo } from '@/components'
+import { Button } from '@/components/ui'
+import Link from 'next/link'
 
-const Home = ({ searchParams }: SearchParamProps) => {
-  const isAdmin = searchParams?.admin === 'true'
-
+const Home = () => {
   return (
-    <div className="flex h-screen max-h-screen">
-      {isAdmin && <PasskeyModal />}
-      <section className="remove-scrollbar container my-auto">
-        <div className="sub-container max-w-[800px]">
-          <Logo full className="mb-12 h-14 w-fit" />
-
-          <PatientForm />
-
-          <Copyright adminBtn />
-        </div>
-      </section>
-      {/* <Image
-        src={''}
-        alt="doctor"
-        height={1000}
-        width={1000}
-        className="side-img max-w-[50%]"
-      /> */}
+    <div className="flex flex-col gap-10 items-center justify-center min-h-screen">
+      <Logo full />
+      <div className="flex gap-2">
+        <Link href="/signup">
+          <Button variant="outline" className="text-pink-500">
+            Get Started
+          </Button>
+        </Link>
+        <Link href="/login">
+          <Button className="shad-primary-btn">Login</Button>
+        </Link>
+      </div>
     </div>
   )
 }

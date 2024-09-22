@@ -1,7 +1,11 @@
 'use server'
 
 import { ID, Query } from 'node-appwrite'
-import { appwriteEnv, databases, messaging } from './appwrite.config'
+import {
+  appwriteEnv,
+  createAdminClient,
+  createSessionClient,
+} from './appwrite.config'
 import { formatDateTime, parseStringify } from '../utils'
 import { Appointment } from '@/types/appwrite.types'
 import { revalidatePath } from 'next/cache'
@@ -9,6 +13,8 @@ import { revalidatePath } from 'next/cache'
 export const createAppointment = async (
   appointmentData: CreateAppointmentParams
 ) => {
+  const { databases } = await createSessionClient()
+
   try {
     const newAppointment = await databases.createDocument(
       appwriteEnv.DB_ID!,
@@ -28,6 +34,8 @@ export const updateAppointment = async ({
   appointment,
   type,
 }: UpdateAppointmentParams) => {
+  const { databases } = await createSessionClient()
+
   try {
     const updatedAppointment = await databases.updateDocument(
       appwriteEnv.DB_ID!,
@@ -67,6 +75,8 @@ export const updateAppointment = async ({
 }
 
 export const getAppointment = async (appointmentId: string) => {
+  const { databases } = await createSessionClient()
+
   try {
     const appointment = await databases.getDocument(
       appwriteEnv.DB_ID!,
@@ -80,6 +90,8 @@ export const getAppointment = async (appointmentId: string) => {
 }
 
 export const getAppointmentList = async () => {
+  const { databases } = await createSessionClient()
+
   try {
     const appointments = await databases.listDocuments(
       appwriteEnv.DB_ID!,
@@ -127,6 +139,8 @@ export const getAppointmentList = async () => {
 }
 
 export const sendSMSNotification = async (userId: string, content: string) => {
+  const { messaging } = await createSessionClient()
+
   try {
     const message = await messaging.createSms(
       ID.unique(),
