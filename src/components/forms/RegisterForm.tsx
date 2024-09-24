@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { CustomFormField, SubmitButton, FileUploader } from '@/components'
 import { CiMail, CiUser } from 'react-icons/ci'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PatientFormData, PatientFormValidation } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
 import { FormFieldType } from '@/constants'
@@ -31,13 +31,20 @@ const RegisterForm = ({ user }: { user: User }) => {
 
   const form = useForm<PatientFormData>({
     resolver: zodResolver(PatientFormValidation),
-    defaultValues: {
-      ...PatientFormDefaultValues,
-      name: '',
-      email: '',
-      phone: '',
-    },
+    defaultValues: PatientFormDefaultValues,
   })
+
+  useEffect(() => {
+    if (user) {
+      form.reset({
+        ...PatientFormDefaultValues,
+        name: user.name || '',
+        email: user.email || '',
+      })
+    }
+  }, [user, form])
+
+  if (!user) return null
 
   const onSubmit: SubmitHandler<PatientFormData> = async (values) => {
     setIsLoading(true)
@@ -100,6 +107,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           placeholder="John Doe"
           icon={<CiUser className="ml-2 h-6 w-6" />}
           iconAlt=""
+          readOnly={user.name ? true : false}
         />
         <div className="flex flex-col gap-6 xl:flex-row">
           {/* Email */}
@@ -111,6 +119,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             placeholder="johndoe@xmail.com"
             icon={<CiMail className="ml-2 h-6 w-6" />}
             iconAlt=""
+            readOnly={user.email ? true : false}
           />
           {/* Phone Number */}
           <CustomFormField

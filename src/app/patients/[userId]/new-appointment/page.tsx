@@ -1,4 +1,4 @@
-import { AppointmentForm, Copyright, Logo } from '@/components'
+import { AppointmentForm, Copyright } from '@/components'
 import { getPatient } from '@/lib/appwrite/patient.actions'
 
 const NewAppointment = async ({ params: { userId } }: SearchParamProps) => {
@@ -7,9 +7,7 @@ const NewAppointment = async ({ params: { userId } }: SearchParamProps) => {
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
-        <div className="sub-container max-w-[900px] flex-1 justify-between">
-          <Logo full className="mb-12 h-14 w-fit" />
-
+        <div className="sub-container max-w-[800px] flex-1 justify-between">
           <AppointmentForm
             type="create"
             userId={userId}

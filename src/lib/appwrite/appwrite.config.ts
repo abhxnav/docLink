@@ -29,6 +29,12 @@ const createAdminClient = async () => {
     get account() {
       return new Account(client)
     },
+    get databases() {
+      return new Databases(client)
+    },
+    get storage() {
+      return new Storage(client)
+    },
     get users() {
       return new Users(client)
     },
@@ -41,11 +47,9 @@ const createSessionClient = async () => {
     .setProject(appwriteEnv.PROJECT_ID!)
 
   const session = cookies().get('session')
-  if (!session || !session.value) {
-    throw new Error('No session')
+  if (session && session.value) {
+    client.setSession(session.value)
   }
-
-  client.setSession(session.value)
 
   return {
     get account() {

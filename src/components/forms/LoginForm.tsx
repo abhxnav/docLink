@@ -10,6 +10,7 @@ import { LoginFormData, LoginFormValidation } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
 import { login } from '@/lib/appwrite/patient.actions'
 import { FormFieldType } from '@/constants'
+import Link from 'next/link'
 
 const LoginForm = () => {
   const router = useRouter()
@@ -68,7 +69,15 @@ const LoginForm = () => {
           icon={<CiLock className="ml-2 h-6 w-6" />}
           iconAlt=""
         />
-        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+        <div className="flex flex-col gap-2">
+          <SubmitButton isLoading={isLoading}>Login</SubmitButton>
+          <p className="text-dark-700 text-center">
+            Don't have an account yet?{' '}
+            <Link href="/signup" className="text-pink-500 hover:underline">
+              Signup now!
+            </Link>
+          </p>
+        </div>
       </form>
     </Form>
   )

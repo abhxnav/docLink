@@ -14,25 +14,12 @@ import { redirect } from 'next/navigation'
 
 export const createUser = async (user: CreateUserParams) => {
   const { users, account } = await createAdminClient()
+  const { name, email, password } = user
 
   try {
-    const { name, email, password } = user
-
-    const salt = await bcryptjs.genSalt(10)
-    const hashedPassword = await bcryptjs.hash(password, salt)
-
     const newUser = await account.create(ID.unique(), email, password, name)
-
     return parseStringify(newUser)
-  } catch (error: unknown) {
-    if (isAppwriteError(error)) {
-      if (error.code === 409) {
-        const documents = await users.list([
-          Query.equal('email', [user?.email]),
-        ])
-        return documents?.users[0]
-      }
-    }
+  } catch (error: any) {
     console.error(error)
   }
 }
@@ -86,10 +73,17 @@ export const getUser = async (userId: string) => {
 }
 
 export const getPatient = async (userId: string) => {
-  const { databases } = await createSessionClient()
+  let client
+  const user = await getLoggedInUser()
+
+  if (user) {
+    client = await createSessionClient()
+  } else {
+    client = await createAdminClient()
+  }
 
   try {
-    const patients = await databases.listDocuments(
+    const patients = await client.databases.listDocuments(
       appwriteEnv.DB_ID!,
       appwriteEnv.PATIENT_COLLECTION_ID!,
       [Query.equal('userId', [userId])]
@@ -104,7 +98,7 @@ export const registerPatient = async ({
   identificationDocument,
   ...patient
 }: RegisterUserParams) => {
-  const { storage, databases } = await createSessionClient()
+  const { storage, databases } = await createAdminClient()
 
   try {
     let file

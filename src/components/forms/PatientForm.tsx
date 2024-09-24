@@ -10,6 +10,7 @@ import { UserFormData, UserFormValidation } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
 import { createUser, login } from '@/lib/appwrite/patient.actions'
 import { FormFieldType } from '@/constants'
+import Link from 'next/link'
 
 const PatientForm = () => {
   const router = useRouter()
@@ -79,7 +80,15 @@ const PatientForm = () => {
           icon={<CiLock className="ml-2 h-6 w-6" />}
           iconAlt=""
         />
-        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+        <div className="flex flex-col gap-2">
+          <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+          <p className="text-dark-700 text-center">
+            Already have an account?{' '}
+            <Link href="/signup" className="text-pink-500 hover:underline">
+              Login!
+            </Link>
+          </p>
+        </div>
       </form>
     </Form>
   )

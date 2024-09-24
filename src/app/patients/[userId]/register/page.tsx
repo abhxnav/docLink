@@ -1,15 +1,13 @@
-import { Copyright, Logo, RegisterForm } from '@/components'
+import { Copyright, RegisterForm } from '@/components'
 import { getUser } from '@/lib/appwrite/patient.actions'
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
   const user = await getUser(userId)
 
   return (
-    <div className="flex h-screen max-h-screen">
+    <div className="flex h-screen max-h-screen pt-32">
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[800px]">
-          <Logo full className="mb-12 h-14 w-fit" />
-
           <RegisterForm user={user as User} />
 
           <Copyright />

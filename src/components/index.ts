@@ -10,6 +10,7 @@ export { default as SubmitButton } from '@/components/shared/SubmitButton'
 export { default as FileUploader } from '@/components/shared/FileUploader'
 export { default as Copyright } from '@/components/shared/Copyright'
 export { default as Logo } from '@/components/shared/Logo'
+export { default as Navbar } from '@/components/shared/Navbar'
 
 export { default as PasskeyModal } from '@/components/admin/PasskeyModal'
 export { default as StatCard } from '@/components/admin/StatCard'

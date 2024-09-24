@@ -32,6 +32,7 @@ interface CustomProps {
   icon?: React.ReactNode
   iconAlt?: string
   disabled?: boolean
+  readOnly?: boolean
   dateFormat?: string
   showTimeSelect?: boolean
   children?: React.ReactNode
@@ -63,6 +64,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               placeholder={placeholder}
               {...field}
               className="shad-input border-0"
+              readOnly={props.readOnly}
             />
           </FormControl>
         </div>
@@ -184,6 +186,7 @@ const CustomFormField = (props: CustomProps) => {
     <FormField
       control={control}
       name={name}
+      disabled={props.disabled}
       render={({ field }) => (
         <FormItem className="flex-1">
           {fieldType !== FormFieldType.CHECKBOX && label && (

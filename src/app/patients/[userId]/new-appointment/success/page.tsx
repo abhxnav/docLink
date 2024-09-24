@@ -6,7 +6,7 @@ import { Doctors } from '@/constants'
 import { CiCalendar } from 'react-icons/ci'
 import { formatDateTime } from '@/lib/utils'
 import { Button } from '@/components/ui'
-import { Copyright, Logo } from '@/components'
+import { Copyright } from '@/components'
 
 const AppointmentSuccess = async ({
   params: { userId },
@@ -21,10 +21,6 @@ const AppointmentSuccess = async ({
   return (
     <div className="flex h-screen max-h-screen px-[5%]">
       <div className="success-img">
-        <Link href="/">
-          <Logo full className="h-10 w-fit" />
-        </Link>
-
         <section className="flex flex-col items-center">
           <Image src={SuccessGIF} height={250} width={250} alt="success" />
           <h2 className="header mb-4 max-w-[600px] text-center">
