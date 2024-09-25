@@ -4,6 +4,7 @@ import './globals.css'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components'
 import type { ReactNode } from 'react'
+import { Toaster } from '@/components/ui'
 
 const fontRoboto = Roboto({
   subsets: ['latin'],
@@ -14,6 +15,9 @@ const fontRoboto = Roboto({
 export const metadata: Metadata = {
   title: 'DocLink - Book appointment, track health',
   description: `A healthcare management tool. Book your doctor's appointment. Track your health.`,
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 interface RootLayoutProps {
@@ -32,6 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider attribute="class" defaultTheme="dark">
           {children}
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   )

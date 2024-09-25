@@ -24,8 +24,10 @@ import {
 } from '@/constants'
 import Image from 'next/image'
 import { registerPatient } from '@/lib/appwrite/patient.actions'
+import { useToast } from '@/hooks/use-toast'
 
 const RegisterForm = ({ user }: { user: User }) => {
+  const { toast } = useToast()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -74,9 +76,20 @@ const RegisterForm = ({ user }: { user: User }) => {
 
       const patient = await registerPatient(patientData)
 
-      if (patient) router.push(`/patients/${user.$id}/new-appointment`)
+      if (patient) {
+        toast({
+          title: 'Registration successful!',
+          description: `Patient registered as ${patient.name}`,
+        })
+        router.push(`/patients/${user.$id}/new-appointment`)
+      }
     } catch (error) {
       console.error(error)
+      toast({
+        title: 'Registration failed!',
+        description: 'Something went wrong. Please try again later.',
+        variant: 'destructive',
+      })
     } finally {
       setIsLoading(false)
     }

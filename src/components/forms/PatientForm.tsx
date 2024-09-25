@@ -11,8 +11,10 @@ import { useRouter } from 'next/navigation'
 import { createUser, login } from '@/lib/appwrite/patient.actions'
 import { FormFieldType } from '@/constants'
 import Link from 'next/link'
+import { useToast } from '@/hooks/use-toast'
 
 const PatientForm = () => {
+  const { toast } = useToast()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -41,6 +43,11 @@ const PatientForm = () => {
       }
     } catch (error) {
       console.error(error)
+      toast({
+        title: 'User already exists.',
+        description: 'Please login or use another email to register.',
+        variant: 'destructive',
+      })
     } finally {
       setIsLoading(false)
     }
@@ -84,7 +91,7 @@ const PatientForm = () => {
           <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
           <p className="text-dark-700 text-center">
             Already have an account?{' '}
-            <Link href="/signup" className="text-pink-500 hover:underline">
+            <Link href="/login" className="text-pink-500 hover:underline">
               Login!
             </Link>
           </p>

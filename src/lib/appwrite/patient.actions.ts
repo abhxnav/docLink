@@ -7,8 +7,7 @@ import {
   createAdminClient,
   createSessionClient,
 } from '@/lib/appwrite/appwrite.config'
-import { isAppwriteError, parseStringify } from '@/lib/utils'
-import bcryptjs from 'bcryptjs'
+import { parseStringify } from '@/lib/utils'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
@@ -17,6 +16,11 @@ export const createUser = async (user: CreateUserParams) => {
   const { name, email, password } = user
 
   try {
+    const existingUser = await users.list([Query.equal('email', email)])
+    if (existingUser.total > 0) {
+      throw new Error('User already exists')
+    }
+
     const newUser = await account.create(ID.unique(), email, password, name)
     return parseStringify(newUser)
   } catch (error: any) {
@@ -39,7 +43,7 @@ export const login = async (user: any) => {
     })
     return parseStringify(session)
   } catch (error) {
-    console.error(error)
+    throw new Error('Invalid credentials')
   }
 }
 
@@ -128,7 +132,7 @@ export const registerPatient = async ({
     )
 
     return parseStringify(newPatient)
-  } catch (error) {
-    console.error(error)
+  } catch (error: any) {
+    throw new Error(error.message)
   }
 }

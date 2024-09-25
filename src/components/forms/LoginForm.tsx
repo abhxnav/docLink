@@ -8,11 +8,13 @@ import { CiLock, CiMail } from 'react-icons/ci'
 import { useState } from 'react'
 import { LoginFormData, LoginFormValidation } from '@/lib/validations'
 import { useRouter } from 'next/navigation'
-import { login } from '@/lib/appwrite/patient.actions'
+import { getUser, login } from '@/lib/appwrite/patient.actions'
 import { FormFieldType } from '@/constants'
 import Link from 'next/link'
+import { useToast } from '@/hooks/use-toast'
 
 const LoginForm = () => {
+  const { toast } = useToast()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -35,10 +37,20 @@ const LoginForm = () => {
 
       if (session) {
         await login({ email, password })
+        const user = await getUser(session.userId)
+        toast({
+          title: 'Login successful!',
+          description: `Logged in as ${user?.name}`,
+        })
         router.push(`/patients/${session.userId}/new-appointment`)
       }
     } catch (error) {
       console.error(error)
+      toast({
+        title: 'Login failed!',
+        description: 'Invalid email or password',
+        variant: 'destructive',
+      })
     } finally {
       setIsLoading(false)
     }
