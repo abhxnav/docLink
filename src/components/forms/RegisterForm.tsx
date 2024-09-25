@@ -150,6 +150,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             fieldType={FormFieldType.DATE_PICKER}
             name="birthDate"
             label="Date of Birth"
+            showYearDropdown
           />
           {/* Gender */}
           <CustomFormField

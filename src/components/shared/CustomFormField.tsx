@@ -22,6 +22,7 @@ import PhoneInput, { type Value } from 'react-phone-number-input'
 import { CiCalendar } from 'react-icons/ci'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { dateTimeRange } from '@/lib/utils'
 
 interface CustomProps {
   control: Control<any>
@@ -35,6 +36,13 @@ interface CustomProps {
   readOnly?: boolean
   dateFormat?: string
   showTimeSelect?: boolean
+  minDate?: Date
+  maxDate?: Date
+  minTime?: Date
+  maxTime?: Date
+  filterTime?: (time: Date) => boolean
+  filterDate?: (date: Date) => boolean
+  showYearDropdown?: boolean
   children?: React.ReactNode
   renderSkeleton?: (field: any) => React.ReactNode
 }
@@ -48,6 +56,13 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     showTimeSelect,
     dateFormat,
     renderSkeleton,
+    minDate,
+    maxDate,
+    minTime,
+    maxTime,
+    filterTime,
+    filterDate,
+    showYearDropdown,
   } = props
 
   switch (fieldType) {
@@ -133,7 +148,13 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
               isClearable
               showMonthDropdown
               useShortMonthInDropdown
-              minDate={new Date()}
+              minDate={minDate}
+              maxDate={maxDate}
+              minTime={minTime && dateTimeRange.getMinTime(field.value)}
+              maxTime={maxTime}
+              filterTime={filterTime}
+              filterDate={filterDate}
+              showYearDropdown={showYearDropdown}
             />
           </FormControl>
         </div>

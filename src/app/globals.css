@@ -389,6 +389,11 @@
   border-radius: 0.3rem;
 }
 
+.react-datepicker__time-list-item--disabled {
+  background-color: #363a3d !important;
+  color: #151515 !important;
+}
+
 .react-datepicker__time-list {
   scrollbar-width: thin !important;
 }

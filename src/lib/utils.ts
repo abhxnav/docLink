@@ -75,3 +75,52 @@ export const isAppwriteError = (
     typeof error.code === 'number'
   )
 }
+
+class DateTimeRange {
+  now: Date
+  officeStartTime: number
+  officeEndTime: number
+  minDate: Date
+  officeMinTime: Date
+  officeMaxTime: Date
+
+  constructor() {
+    this.now = new Date()
+    this.officeStartTime = 10
+    this.officeEndTime = 19
+    this.minDate = new Date()
+    this.officeMinTime = new Date()
+    this.officeMaxTime = new Date()
+    this.officeMinTime.setHours(this.officeStartTime, 0, 0, 0)
+    this.officeMaxTime.setHours(this.officeEndTime, 0, 0, 0)
+  }
+
+  filterTime = (time: Date) => {
+    const selectedTime = time.getHours()
+    return (
+      selectedTime >= this.officeStartTime && selectedTime < this.officeEndTime
+    )
+  }
+
+  isDisabledDate = (date: Date) => {
+    const today = new Date()
+    if (date.toDateString() === today.toDateString()) {
+      return this.now.getHours() >= this.officeEndTime
+    }
+    return false
+  }
+
+  getMinTime = (selectedDate: Date | null) => {
+    if (
+      selectedDate &&
+      selectedDate.toDateString() === this.now.toDateString()
+    ) {
+      return this.now.getHours() >= this.officeStartTime
+        ? this.now
+        : this.officeMinTime
+    }
+    return this.officeMinTime
+  }
+}
+
+export const dateTimeRange = new DateTimeRange()

@@ -16,6 +16,7 @@ import {
 import { getAppointmentSchema } from '@/lib/validations'
 import { z } from 'zod'
 import { Appointment } from '@/types/appwrite.types'
+import { dateTimeRange } from '@/lib/utils'
 
 interface CustomProps {
   type: 'create' | 'cancel' | 'schedule'
@@ -161,6 +162,11 @@ const AppointmentForm = ({
               label="Expected appointment date"
               showTimeSelect
               dateFormat="dd/MM/yyyy - h:mm aa"
+              minDate={dateTimeRange.minDate}
+              minTime={new Date()}
+              maxTime={dateTimeRange.officeMaxTime}
+              filterTime={dateTimeRange.filterTime}
+              filterDate={(date) => !dateTimeRange.isDisabledDate(date)}
             />
 
             <div className="flex flex-col gap-6 xl:flex-row">
