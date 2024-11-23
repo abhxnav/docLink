@@ -29,8 +29,8 @@ const AppointmentSuccess = async ({
           </h2>
           <p>
             We will send you a confirmation
-            <span className="text-pink-500">sms</span> and
-            <span className="text-pink-500">email</span> shortly.
+            <span className="text-pink-500"> sms</span> and
+            <span className="text-pink-500"> email</span> shortly.
           </p>
         </section>
 

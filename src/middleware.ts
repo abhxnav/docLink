@@ -13,34 +13,25 @@ export const middleware = async (req: NextRequest) => {
     }
 
     if (user) {
-      const patient = await getPatient(user?.targets[0]?.userId!)
+      const userId = user?.targets[0]?.userId!
+      const patient = await getPatient(userId)
+      const isRegisterPath = path.includes('/register')
+      const isNewAppointmentPath = path.startsWith(
+        `/patients/${userId}/new-appointment`
+      )
+
+      if (!patient && !isRegisterPath) {
+        return NextResponse.redirect(
+          new URL(`/patients/${userId}/register`, req.nextUrl)
+        )
+      }
 
       if (
-        isPublicPath ||
-        path.includes('/register') ||
-        path.includes('/new-appointment')
+        patient &&
+        isNewAppointmentPath &&
+        path !== `/patients/${userId}/new-appointment`
       ) {
-        if (patient) {
-          if (
-            path !== `/patients/${user?.targets[0]?.userId}/new-appointment`
-          ) {
-            return NextResponse.redirect(
-              new URL(
-                `/patients/${user?.targets[0]?.userId}/new-appointment`,
-                req.nextUrl
-              )
-            )
-          }
-        } else {
-          if (path !== `/patients/${user?.targets[0]?.userId}/register`) {
-            return NextResponse.redirect(
-              new URL(
-                `/patients/${user?.targets[0]?.userId}/register`,
-                req.nextUrl
-              )
-            )
-          }
-        }
+        return NextResponse.next()
       }
     }
   } catch (error) {

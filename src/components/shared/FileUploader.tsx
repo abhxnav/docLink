@@ -30,7 +30,7 @@ const FileUploader = ({ files, onChange }: FileUploaderProps) => {
           width={1000}
           height={1000}
           alt="uploaded image"
-          className="max-h-[400px] overflow-hidden object-cover"
+          className="max-h-[400px] overflow-hidden object-contain"
         />
       ) : (
         <>
