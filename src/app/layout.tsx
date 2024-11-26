@@ -3,8 +3,9 @@ import { Roboto } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components'
-import type { ReactNode } from 'react'
+import { Suspense, type ReactNode } from 'react'
 import { Toaster } from '@/components/ui'
+import Loading from '@/app/loading'
 
 const fontRoboto = Roboto({
   subsets: ['latin'],
@@ -34,7 +35,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </ThemeProvider>
         <Toaster />
       </body>

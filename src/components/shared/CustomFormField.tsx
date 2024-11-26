@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import {
   FormControl,
   FormField,
@@ -23,6 +23,7 @@ import { CiCalendar } from 'react-icons/ci'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { dateTimeRange } from '@/lib/utils'
+import { VscEye, VscEyeClosed } from 'react-icons/vsc'
 
 interface CustomProps {
   control: Control<any>
@@ -65,6 +66,12 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     showYearDropdown,
   } = props
 
+  const [showPassword, setShowPassword] = useState(false)
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
+
   switch (fieldType) {
     case FormFieldType.INPUT:
       return (
@@ -87,20 +94,35 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 
     case FormFieldType.PASSWORD:
       return (
-        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+        <div className="flex items-center rounded-md border border-dark-500 bg-dark-400">
           {icon ? (
             <div className="flex items-center justify-center">{icon}</div>
           ) : (
             <p>{iconAlt}</p>
           )}
-          <FormControl>
+          <FormControl className="flex-grow">
             <Input
               placeholder={placeholder}
               {...field}
+              type={showPassword ? 'text' : 'password'}
               className="shad-input border-0"
-              type="password"
             />
           </FormControl>
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="p-2 focus:outline-none"
+          >
+            {showPassword ? (
+              <span role="img" aria-label="Hide Password">
+                <VscEye className="size-5 mr-2" />
+              </span>
+            ) : (
+              <span role="img" aria-label="Show Password">
+                <VscEyeClosed className="size-5 mr-2" />
+              </span>
+            )}
+          </button>
         </div>
       )
 

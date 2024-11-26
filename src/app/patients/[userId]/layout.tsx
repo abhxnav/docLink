@@ -1,6 +1,7 @@
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 import { Navbar } from '@/components'
 import { getPatient } from '@/lib/appwrite/patient.actions'
+import Loading from '@/app/loading'
 
 const PatientLayout = async ({
   children,
@@ -13,10 +14,10 @@ const PatientLayout = async ({
   const patient = await getPatient(userId)
 
   return (
-    <div>
+    <Suspense fallback={<Loading />}>
       <Navbar patient={patient} />
       <main>{children}</main>
-    </div>
+    </Suspense>
   )
 }
 
